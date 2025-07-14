@@ -1,0 +1,42 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Website with Filum Chat</title>
+  </head>
+  <body>
+    <!-- Your website content -->
+
+    <!-- Filum Chat SDK -->
+    <script
+      type="text/javascript"
+      src="https://filum-assets.s3.ap-southeast-1.amazonaws.com/dist/filum_chat_latest.umd.js"
+    ></script>
+
+    <script>
+      // Initialize the chat with your organization ID
+      ;(async function () {
+        await window.filumChat.initialize({
+          organizationId: 'e25aff98-68f6-4f53-acce-7ea657bcd935',
+          installedSourceId: 3937
+        })
+
+        // Show the chat button
+        window.filumChat.show()
+
+        // Listen for new messages
+        window.filumChat.onMessage((message) => {
+          console.log('New message:', message)
+        })
+      })()
+
+      // Example of a button that opens the chat when clicked
+      document
+        .getElementById('open-chat-button')
+        .addEventListener('click', () => {
+          window.filumChat.maximize()
+        })
+    </script>
+  </body>
+</html>
