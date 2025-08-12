@@ -2,9 +2,50 @@
 <html>
   <head>
     <title>My Website with Filum Chat</title>
+    <style>
+      :root {
+        --bg-color: #fff;
+        --text-color: #222;
+        --button-bg: #eee;
+        --button-text: #333;
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        margin: 0;
+        font-family: Arial, sans-serif;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      .dark-mode {
+        --bg-color: #181818;
+        --text-color: #fafafa;
+        --button-bg: #232323;
+        --button-text: #eee;
+      }
+      .theme-toggle-btn {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        background: var(--button-bg);
+        color: var(--button-text);
+        border: none;
+        border-radius: 4px;
+        padding: 8px 14px;
+        cursor: pointer;
+        z-index: 9999;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        font-size: 16px;
+      }
+    </style>
   </head>
-  <body style="background-color=black">
+  <body>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+
     <!-- Your website content -->
+
+    <!-- Example open chat button for demonstration -->
+    <button id="open-chat-button" style="margin: 40px 16px;">Open Chat</button>
 
     <!-- Filum Chat SDK -->
     <script
@@ -13,25 +54,46 @@
     ></script>
 
     <script>
+      // Theme toggle logic
+      const toggleBtn = document.getElementById('theme-toggle');
+      const body = document.body;
+
+      // Initialize theme from localStorage or prefers-color-scheme
+      function setTheme(mode) {
+        if (mode === 'dark') {
+          body.classList.add('dark-mode');
+          toggleBtn.textContent = '☀️ Light Mode';
+        } else {
+          body.classList.remove('dark-mode');
+          toggleBtn.textContent = '🌙 Dark Mode';
+        }
+      }
+      function getPreferredTheme() {
+        if (localStorage.getItem('theme')) return localStorage.getItem('theme');
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      setTheme(getPreferredTheme());
+      toggleBtn.addEventListener('click', () => {
+        const isDark = body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        setTheme(isDark ? 'dark' : 'light');
+      });
+
       // Initialize the chat with your organization ID
       ;(async function () {
         await window.filumChat.initialize({
           organizationId: '8706c5ac-c255-43ea-bf01-58d238e8c086',
           installedSourceId: 3794
         })
-
         // Show the chat button
         window.filumChat.show()
-
-        
-      })()
+      })();
 
       // Example of a button that opens the chat when clicked
-      document
-        .getElementById('open-chat-button')
+      document.getElementById('open-chat-button')
         .addEventListener('click', () => {
           window.filumChat.maximize()
-        })
+        });
     </script>
   </body>
 </html>
