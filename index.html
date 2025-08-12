@@ -9,25 +9,12 @@
     <!-- Your website content -->
 
     <!-- Filum Chat SDK -->
-    <script
-      type="text/javascript"
-      src="https://filum-assets.s3.ap-southeast-1.amazonaws.com/dist/filum_chat_dev.umd.js"
-    ></script>
+    <script type="text/javascript" src="https://filum-assets.s3.ap-southeast-1.amazonaws.com/dist/filum_chat_dev.umd.js" />
 
-    <script>
-      // Initialize the chat with your organization ID
-      ;(async function () {
-        await window.filumChat.initialize({
-          organizationId: '8706c5ac-c255-43ea-bf01-58d238e8c086',
-          installedSourceId: 3794
-        })
-
-        // Show the chat button
-        window.filumChat.show()
-      })()
-
-      // Example of a button that opens the chat when clicked
-     
+window.filumChat.initialize({
+  organizationId: '8706c5ac-c255-43ea-bf01-58d238e8c086',
+  installedSourceId: 3794
+})
     </script>
   </body>
 </html>
