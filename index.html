@@ -24,19 +24,10 @@
 
         // Show the chat button
         window.filumChat.show()
-
-        // Listen for new messages
-        window.filumChat.onMessage((message) => {
-          console.log('New message:', message)
-        })
       })()
 
       // Example of a button that opens the chat when clicked
-      document
-        .getElementById('open-chat-button')
-        .addEventListener('click', () => {
-          window.filumChat.maximize()
-        })
+     
     </script>
   </body>
 </html>
