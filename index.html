@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -9,23 +7,34 @@
     <!-- Your website content -->
 
     <!-- Filum Chat SDK -->
-    <script type="text/javascript" src="https://filum-assets.s3.ap-southeast-1.amazonaws.com/dist/filum_chat_latest.umd.js" />
+    <script
+      type="text/javascript"
+      src="https://filum-assets.s3.ap-southeast-1.amazonaws.com/dist/filum_chat_dev.umd.js"
+    ></script>
 
-    
     <script>
-    window.filumChat.initialize({
-      organizationId: '8706c5ac-c255-43ea-bf01-58d238e8c086',
-      installedSourceId: 3794
-    })
+      // Initialize the chat with your organization ID
+      ;(async function () {
+        await window.filumChat.initialize({
+          organizationId: '8706c5ac-c255-43ea-bf01-58d238e8c086',
+          installedSourceId: 3794
+        })
 
-    // Show the chat button
-    window.filumChat.show()
+        // Show the chat button
+        window.filumChat.show()
 
-    document
+        // Listen for new messages
+        window.filumChat.onMessage((message) => {
+          console.log('New message:', message)
+        })
+      })()
+
+      // Example of a button that opens the chat when clicked
+      document
         .getElementById('open-chat-button')
         .addEventListener('click', () => {
           window.filumChat.maximize()
         })
-      </script>
+    </script>
   </body>
 </html>
