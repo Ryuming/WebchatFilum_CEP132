@@ -349,32 +349,7 @@
         // --- EVENT LISTENERS ---
 
         // Initial render on page load and chat initialization
-        document.addEventListener('DOMContentLoaded', () => {
-            renderMenu();
 
-            // Initialize Filum Chat
-            ;(async function () {
-                // Poll to wait for the filumChat object to become available
-                const interval = setInterval(async () => {
-                    if (window.filumChat) {
-                        clearInterval(interval);
-                        await window.filumChat.initialize({
-                            organizationId: '8706c5ac-c255-43ea-bf01-58d238e8c086',
-                            installedSourceId: 3794
-                        });
-                        // Show the chat widget
-                        window.filumChat.show();
-                    }
-                }, 100);
-            })();
-
-            // Event listener for the custom button to open the chat
-            document.getElementById('open-chat-button').addEventListener('click', () => {
-                if (window.filumChat) {
-                    window.filumChat.maximize();
-                }
-            });
-        });
 
         // Modal close events
         closeModalBtn.addEventListener('click', closeModal);
@@ -434,6 +409,35 @@
             }
         });
 
+    </script>
+    <script
+      type="text/javascript"
+      src="https://filum-assets.s3.ap-southeast-1.amazonaws.com/dist/filum_chat_latest.umd.js"
+    ></script>
+
+    <script>
+      // Initialize the chat with your organization ID
+      ;(async function () {
+        await window.filumChat.initialize({
+          organizationId: '8706c5ac-c255-43ea-bf01-58d238e8c086',
+          installedSourceId: 3794
+        })
+
+        // Show the chat button
+        window.filumChat.show()
+
+        // Listen for new messages
+        window.filumChat.onMessage((message) => {
+          console.log('New message:', message)
+        })
+      })()
+
+      // Example of a button that opens the chat when clicked
+      document
+        .getElementById('open-chat-button')
+        .addEventListener('click', () => {
+          window.filumChat.maximize()
+        })
     </script>
 </body>
 </html>
