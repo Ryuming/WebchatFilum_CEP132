@@ -516,7 +516,15 @@
       window.filumChat.initialize({
         organizationId: '8706c5ac-c255-43ea-bf01-58d238e8c086',
         installedSourceId: 3794,
+        hideLauncherButton: true
       }).then(() => window.filumChat.show())
+    
+      // Example of a button that opens the chat when clicked
+      document
+        .getElementById('open-chat-button')
+        .addEventListener('click', () => {
+          window.filumChat.maximize()
+        })
     </script>
 </body>
 </html>
