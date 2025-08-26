@@ -95,8 +95,11 @@
                     </div>
                 </div>
                 <div class="flex items-center">
-                    <button id="show-hide-webchat" type="button" class="text-gray-200 hover:text-white rounded-lg text-sm p-2.5">
-                        Show/Hide Webchat
+                    <button id="show-webchat" type="button" class="text-gray-200 hover:text-white rounded-lg text-sm p-2.5">
+                        Show Webchat
+                    </button>
+                    <button id="hide-webchat" type="button" class="text-gray-200 hover:text-white rounded-lg text-sm p-2.5">
+                        Hide Webchat
                     </button>
                 </div>
                 <!-- Dark Mode Toggle -->
@@ -525,9 +528,15 @@
     
       // Example of a button that opens the chat when clicked
       document
-        .getElementById('show-hide-webchat')
+        .getElementById('show-webchat')
         .addEventListener('click', () => {
           window.filumChat.maximize()
+        })
+
+     document
+        .getElementById('hide-webchat')
+        .addEventListener('click', () => {
+          window.filumChat.minimize()
         })
     </script>
 </body>
